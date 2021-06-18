@@ -1,0 +1,75 @@
+{% extends 'homebase.html' %}
+
+{% block title %} Order Product Detail {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+
+{% block sidebar %} {% include 'sidebar.html' %} {% endblock %}
+
+{% block body %}
+
+	<!-- BREADCRUMB -->
+	<div id="breadcrumb">
+		<div class="container">
+			<ul class="breadcrumb">
+				<li><a href="/">Home</a></li>
+				<li class="active">order product detail</li>
+			</ul>
+		</div>
+	</div>
+	<!-- /BREADCRUMB -->
+
+	<!-- section -->
+	<div class="section">
+		<!-- container -->
+		<div class="container">
+			<!-- row -->
+			<div class="row">
+				<div class="col-md-3">
+                    {% include "user_panel.html" %}
+                </div>
+
+				<div class="col-md-9">
+						<div class="order-summary clearfix">
+							<div class="section-title">
+								<h3 class="title">Order Product Detail</h3>
+							</div>
+
+						<div class="section-title">
+                            <h4 class="title">Order Item List</h4>
+                        </div>
+						<table class="shopping-cart-table table">
+						<tr>
+							<th class="text-left">Id </th>
+							<th class="text-left">Product Name </th>
+							<th class="text-left">Price </th>
+							<th class="text-left">Qauatity </th>
+							<th class="text-left">Amount </th>
+							<th class="text-left">Status </th>
+							<th class="text-left">Date </th>
+						</tr>
+						{% for rs in order_product %}
+							<tr>
+								<td class="text-left">
+									<a href="/product/{{ rs.product_id }}/{{ rs.product.slug }}">
+										<img src="{{rs.product.image.url}}" height="80px">
+									</a>
+								</td>
+								<td class="text-left"><a href="/product/{{ rs.product_id }}/{{ rs.product.slug }}">{{rs.product.title}}</a></td>
+								<td class="text-left">{{rs.price}}</td>
+								<td class="text-left">{{rs.quantity}}</td>
+								<td class="text-left">{{rs.amount}}</td>
+								<td class="text-left">{{rs.status}}</td>
+								<td class="text-left">{{rs.create_at}}</td>
+							</tr>
+						{% endfor %}
+						</table>
+				</div>
+
+			</div>
+			<!-- /row -->
+		</div>
+		<!-- /container -->
+	</div>
+	<!-- /section -->
+{% endblock %}
